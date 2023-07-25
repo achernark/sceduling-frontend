@@ -10,11 +10,10 @@ const Account = () =>{
         window.location.href = selectedValue;
     }
     return(<div>
-
-        <label htmlFor='account'>Account</label>
+        
 
         <select name="Account" id='account' value={selectedOption} onChange={selectedOptionHandler}>
-            <option value=''></option>
+            <option value=''>Account</option>
             <option value='/login'>Login</option>
         </select>
 

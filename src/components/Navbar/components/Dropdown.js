@@ -12,9 +12,9 @@ const Dropdown =()=>{
         window.location.href = selectedValue;
     }
     return(<div>
-        <label htmlFor='more'>More</label>
+        
         <select name='more' id='more' value={selectedOption} onChange={selectedOptionHandler}>
-            <option value=''></option>
+            <option value=''>More</option>
             <option value='/about'>About</option>
         </select>
     </div>)
