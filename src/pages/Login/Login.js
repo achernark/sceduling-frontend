@@ -1,9 +1,14 @@
 import React from "react";
-import Form from './components/Form'
+import {Link} from "react-router-dom"
+import LoginForm from './components/LoginForm'
+import CreateAccount from "../CreateAccount/CreateAccount";
+
+
 const Login = () =>{
 
     return (<div>
-        <Form />
+        <LoginForm />
+        <Link to="/create-account">Create Account</Link>
     </div>)
 }
 

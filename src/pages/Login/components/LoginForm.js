@@ -1,12 +1,16 @@
+
 import React,{useState} from "react";
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
-const Form = () =>{
+const LoginForm = () =>{
 
-        
+    const navigate = useNavigate();
+
     const [companyID, setCompanyID] = useState(null);
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
-
+    const [error, setError] = useState(null);
 
         //company ID
     const companyIDHandler = (event) => {
@@ -23,25 +27,42 @@ const Form = () =>{
 
 
     
-    const loginSubmitHandler = (event) => {     //<form> handler when submited
+    const loginSubmitHandler = async (event) => {     //<form> handler when submited
         event.preventDefault();             //prevents default submission
+        
+        
+        try{
+            const response = await axios.post('http://localhost:4000/api/account/login', {companyID,username,password})
+            
+            if(response.data.success){
+                console.log("loggin success")
+                navigate('/account');
+            }else{
+                
+            }
+        }catch(error){
+            setError("An Error has occured during login");
+            console.error(error)
+        }
+        
     }
+
     return (<div>
         <form onSubmit={loginSubmitHandler}>
             <div>
-                <label for="companyID">Company ID</label>
+                <label htmlFor="companyID">Company ID</label>
                 <input type="text" pattern="[0-9]*" inputMode="numeric" id="companyID" name='companyID' onChange={companyIDHandler}/>
             </div>
             <div>
-                <label for='username'>Username</label>
+                <label htmlFor='username'>Username</label>
                 <input type='text' id='username' name='username' onChange={usernameHandler}/>
             </div>
             <div>
-                <label for='password'>Password</label>
+                <label htmlFor='password'>Password</label>
                 <input type='password' id="password" name='password' onChange={passwordHandler}/>
             </div>
             <div>
-                <label for="rememberAccount">Remember Account</label>
+                <label htmlFor="rememberAccount">Remember Account</label>
                 <input type="checkbox" id="rememberAccount" name="rememberAccount" />
             </div>
             <button type='submit' name='login'>Login</button>
@@ -49,4 +70,4 @@ const Form = () =>{
     </div>)
 }
 
-export default Form;
+export default LoginForm;
